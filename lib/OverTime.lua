@@ -6,7 +6,7 @@
 -- /ddddy:oddddddddds:sddddd/ By adebray - adebray
 -- sdddddddddddddddddddddddds
 -- sdddddddddddddddddddddddds Created: 2015-03-30 16:03:49
--- :ddddddddddhyyddddddddddd: Modified: 2015-03-30 17:10:23
+-- :ddddddddddhyyddddddddddd: Modified: 2015-03-31 16:05:59
 --  odddddddd/`:-`sdddddddds
 --   +ddddddh`+dh +dddddddo
 --    -sdddddh///sdddddds-
@@ -18,15 +18,17 @@ local OverTime = {}
 OverTime.list = {}
 OverTime.time = 0
 
-function OverTime:new(f, color)
+function OverTime:new(f, color, phase)
+	if not phase then phase = 0 end
 	new = {
 		ft = f,
 		table = {},
 		get = function (self)
-			return self.table[#self.table].n
+			return (self.table[#self.table].n)
 		end,
 		update = function (self, time)
-			table.insert(self.table, {n = self.ft(time), x = time, y = self.ft(time) * -100 + love.window.getHeight() / 2})
+			local i = self.ft(time + phase)
+			table.insert(self.table, {n = i, x = time, y = i * -100 + love.window.getHeight() / 2})
 			if #self.table > love.window.getWidth() then
 				table.remove(self.table, 1)
 			end
