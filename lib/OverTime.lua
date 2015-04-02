@@ -6,7 +6,7 @@
 -- /ddddy:oddddddddds:sddddd/ By adebray - adebray
 -- sdddddddddddddddddddddddds
 -- sdddddddddddddddddddddddds Created: 2015-03-30 16:03:49
--- :ddddddddddhyyddddddddddd: Modified: 2015-03-31 16:05:59
+-- :ddddddddddhyyddddddddddd: Modified: 2015-04-02 15:47:05
 --  odddddddd/`:-`sdddddddds
 --   +ddddddh`+dh +dddddddo
 --    -sdddddh///sdddddds-
@@ -38,7 +38,6 @@ function OverTime:new(f, color, phase)
 			for i,v in ipairs(self.table) do
 				love.graphics.circle('fill', i, v.y, 2)
 			end
-			love.setBlank()
 		end
 	}
 	table.insert(self.list, new)

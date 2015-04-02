@@ -6,235 +6,188 @@
 -- /ddddy:oddddddddds:sddddd/ By adebray - adebray
 -- sdddddddddddddddddddddddds
 -- sdddddddddddddddddddddddds Created: 2015-03-27 13:30:45
--- :ddddddddddhyyddddddddddd: Modified: 2015-03-31 18:50:11
+-- :ddddddddddhyyddddddddddd: Modified: 2015-04-02 17:18:55
 --  odddddddd/`:-`sdddddddds
 --   +ddddddh`+dh +dddddddo
 --    -sdddddh///sdddddds-
 --      .+ydddddddddhs/.
 --          .-::::-`
 
-function love.setBlank(val)
-	if val then love.graphics.setColor(255 * val, 255 * val, 255 * val, 255)
-	else love.graphics.setColor(255, 255, 255, 255) end
-end
-
-function love.setRed(val)
-	if val then love.graphics.setColor(255 * val, 0, 0, 255)
-	else love.graphics.setColor(255, 0, 0, 255) end
-end
-
-function love.setGreen(val)
-	if val then love.graphics.setColor(0, 255 * val, 0, 255)
-	else love.graphics.setColor(0, 255, 0, 255) end
-end
-
-function love.setBlue(val)
-	if val then love.graphics.setColor(0, 0, 255 * val, 255)
-	else love.graphics.setColor(0, 0, 255, 255) end
-end
-
 FPS = require 'lib.FPS'
 OverTime = require 'lib.OverTime'
-
-cos_1 = function (x)
-	local c = math.cos(x)
-	if c < 0 then
-		return c * -1
-	else
-		return c
-	end
-end
-
-sin_1 = function (x)
-	local s = math.sin(x)
-	if s < 0 then
-		return s * -1
-	else
-		return s
-	end
-end
-
-cos_2 = function (x)
-	return (math.cos(x) / 2) + 0.5
-end
-
-cos_2t = function (x)
-	x = x + (math.pi * (4 / 3))
-	return (math.cos(x) / 2) + 0.5
-end
-
-cos_1t = function (x)
-	x = x + (math.pi *(2 / 3))
-	return (math.cos(x) / 2) + 0.5
-end
-
-
-sin_2 = function (x)
-	return (math.sin(x) / 2) + 0.5
-end
-
-megacos2 = function (x)
-	x = x - math.pi
-	return (math.cos(x) / 2) + 0.5
-end
-
-megacos3 = function (x)
-	x = x - math.pi
-	return (math.cos(x) / 2) + 0.5
-end
+EasyColor = require 'lib.EasyColor'
+EasyMath = require 'lib.EasyMath'
 
 function add(x)
 	-- print((math.cos(x) + math.sin(x)) / 4)
 	return ((math.cos(x) + math.sin(x)) / 4) + 0.5
 end
 
-scale = 100
+scale = 50
 var1 = 0
 mode = 'line'
 shape = 'circle'
 
-function love.load()
-	FPS:new(1)
+-- function love.load()
+-- 	FPS:new(1)
 
-	-- OverTime:new(math.tan, {r = 0, g = 0, b = 200, a = 255})
-	cos = OverTime:new(cos_2, {r = 200, g = 150, b = 0, a = 255})
-	cos3 = OverTime:new(cos_2, {r = 100, g = 100, b = 0, a = 255}, math.pi)
-	cos1t = OverTime:new(cos_1t, {r = 200, g = 0, b = 0, a = 255})
-	cos2t = OverTime:new(cos_2t, {r = 200, g = 0, b = 0, a = 255})
-	--mcos = OverTime:new(megacos3, {r = 0, g = 0, b = 200, a = 255})
-	-- cos_2 = OverTime:new(cos_2, {r = 100, g = 0, b = 0, a = 255})
-	-- OverTime:new(math.sin, {r = 0, g = 255, b = 0, a = 255})
-	-- OverTime:new(sin_1, {r = 0, g = 200, b = 0, a = 255})
-	--sin = OverTime:new(sin_2, {r = 0, g = 100, b = 0, a = 255})
-	--add = OverTime:new(add, {r = 0, g = 00, b = 200, a = 255})
-	-- sin = OverTime:new(megasin)
-	-- sin2 = OverTime:new(megasin2)
-	-- ssin = OverTime:new(supersin)
-	-- OverTime:new(math.tan)
-	-- OverTime:new(math.exp)
-	-- OverTime:new(math.frexp)
-	-- log = OverTime:new(math.log, {r = 0, g = 0, b = 200, a = 255})
+-- 	if not arg[2] then arg[2] = 0 end
+-- 	if not arg[3] then arg[3] = 255 end
 
-	-- max = tonumber(arg[2]) * tonumber(arg[2])
-	if not arg[2] then arg[2] = 0 end
-	if not arg[3] then arg[3] = 255 end
+-- 	max = scale * scale
+-- 	math.randomseed(love.timer.getTime())
+-- 	t1 = {}
 
-	max = scale * scale
-	math.randomseed(love.timer.getTime())
-	t1 = {}
+-- 	Wsize = love.window.getWidth() / scale
+-- 	Hsize = love.window.getHeight() / scale
+-- 	local x = 0
+-- 	local y = 0
 
-	Wsize = love.window.getWidth() / scale
-	Hsize = love.window.getHeight() / scale
-	local x = 0
-	local y = 0
+-- 	for i=1,max do
+-- 				table.insert(t1, {n = math.random(0, 255), x = x * Wsize, y = y * Hsize})
+-- 		y = y + 1
+-- 		if y >= scale then
+-- 			y = 0
+-- 			x = x + 1
+-- 		end
+-- 	end
+-- 	mouse_x, mouse_y = love.mouse.getPosition()
 
-	for i=1,max do
-		-- if t1[i - 1] and t1[i - 1].n == 1 then
-		-- 	table.insert(t1, {n = 0, x = x * size, y = y * size})
-		-- else
-		-- 	if t1[i - tonumber(arg[2])] and t1[i - tonumber(arg[2])].n == 1 then
-		-- 		table.insert(t1, {n = 0, x = x * size, y = y * size})
-		-- 	else
-				table.insert(t1, {n = math.random(0, 255), x = x * Wsize, y = y * Hsize})
-		-- 	end
-		-- end
-		y = y + 1
-		if y >= scale then
-			y = 0
-			x = x + 1
-		end
-	end
-	mouse_x, mouse_y = love.mouse.getPosition()
+-- 	time = 1
 
-	time = 1
+-- 	canvas = love.graphics.newCanvas(love.window.getWidth(), love.window.getHeight())
 
-	canvas = love.graphics.newCanvas(love.window.getWidth(), love.window.getHeight())
-end
+-- 	cos1 = OverTime:new(EasyMath.pnormal.cos, {r = 0, g = 0, b = 0}, 1 * math.pi / 3)
+-- 	cos2 = OverTime:new(EasyMath.pnormal.cos, {r = 0, g = 0, b = 0}, 3 * math.pi / 3)
+-- 	cos3 = OverTime:new(EasyMath.pnormal.cos, {r = 0, g = 0, b = 0}, 5 * math.pi / 3)
+-- 	-- cos5 = OverTime:new(math.cos, {r = 0, g = 0, b = 200}, math.pi / 2)
+-- 	-- cos5 = OverTime:new(EasyMath.pnormal.cos, {r = 200, g = 0, b = 0}, math.pi)
+-- 	add1 = OverTime:new(add, {r = 0, g = 200, b = 0})
+-- 	add2 = OverTime:new(add, {r = 0, g = 200, b = 0}, math.pi)
+-- end
 
 function exec(val, op)
 	return val * op
 end
 
-function love.update(dt)
-	time = time + dt
-	mouse_x, mouse_y = love.mouse.getPosition()
-	OverTime:update(dt)
+-- function love.update(dt)
+-- 	time = time + dt
+-- 	mouse_x, mouse_y = love.mouse.getPosition()
+-- 	OverTime:update(dt)
 
-	love.graphics.setCanvas(canvas)
-	canvas:clear()
+-- 	love.graphics.setCanvas(canvas)
+-- 	canvas:clear()
 
-	local j = 1
-	for i=1,max do
-		-- if t1[i].n == 0 then
-		-- 	love.graphics.setColor(100, 100, 100, 100)
-		-- else
-		-- 	love.graphics.setColor(200, 200, 200, 200)
-		-- end
-		-- print((t1[i].x * t1[i].y + time) % 255)
-		-- print(exec((t1[i].x * t1[i].y + time) % 255, 1))
+-- 	local j = 1
+-- 	for i=1,max do
+-- 		-- if t1[i].n == 0 then
+-- 		-- 	love.graphics.setColor(100, 100, 100, 100)
+-- 		-- else
+-- 		-- 	love.graphics.setColor(200, 200, 200, 200)
+-- 		-- end
+-- 		-- print((t1[i].x * t1[i].y + time) % 255)
+-- 		-- print(exec((t1[i].x * t1[i].y + time) % 255, 1))
 
-		-- print(i, j)
+-- 		-- print(i, j)
 
 
-		-- if math.floor((i % arg[2]) % 3) == 1 and math.floor(((i % arg[2]) + j) % 3) == 1 then
-		-- 	love.graphics.setColor(
-				--exec((t1[i].x * t1[i].y + time * 64) / 64, 1),
-			-- 	exec(255, 1),
-			-- 	exec(255, 1),
-			-- 	exec(255, 1),
-			-- 	exec(255, (t1[i].x * t1[i].y + time * var1) / var1)
-			-- 	-- exec(255,1),
-			-- 		--(t1[i].x * t1[i].y
-			-- 	-- + sin:get()
-			-- 		--)),
-			-- 	-- exec(255,1),
-			-- 	--(t1[i].x * t1[i].y
-			-- 	-- + (cos:get() + sin:get())
-			-- 		--)),
-			-- 	-- exec(255, (t1[i].x * t1[i].y + time * scale) / scale)
-			-- )
-		-- else
-			love.graphics.setColor(
-				--exec((t1[i].x * t1[i].y + time * 64) / 64, 1),
-				exec(255, 1),
-				exec(255, 1),
-				exec(255, 1),
-				exec(255, (t1[i].x * t1[i].y + time * var1) / var1)
-				-- exec(t1[i].n, cos:get()),
-				-- exec(t1[i].n, cos1t:get()),
-				-- exec(t1[i].n, cos2t:get()),
-				-- exec(255, (t1[i].x * t1[i].y + time * var1) / var1)
-				-- exec(255,1),
-					--(t1[i].x * t1[i].y
-				-- + sin:get()
-					--)),
-				-- exec(255,1),
-				--(t1[i].x * t1[i].y
-				-- + (cos:get() + sin:get())
-					--)),
-				-- exec(255, (t1[i].x * t1[i].y + time * scale) / scale)
-			)
-		-- end
-			love.graphics.rectangle("fill", t1[i].x + 1, t1[i].y + 1, Wsize - 2, Hsize - 2)
-			-- love.graphics.circle("fill", t1[i].x + 1, t1[i].y + 1, (size / 2) - 2)
-			-- t1[i].n = time
-			love.setBlank()
-		if i % arg[2] == 0 then
-			j = j + 1
+-- 		if math.floor((i % scale) % 3) == 1 and math.floor(((i % scale) + j) % 3) == 1 then
+-- 			love.graphics.setColor(
+-- 				-- exec((t1[i].x * t1[i].y + time * 64) / 64, 1),
+-- 				exec(255, 1),
+-- 				exec(255, cos1:get()),
+-- 				exec(255, 0),
+-- 				exec(255, (t1[i].x * t1[i].y + time * var1) / var1)
+-- 				-- exec(255,1),
+-- 					--(t1[i].x * t1[i].y
+-- 				-- + sin:get()
+-- 					--)),
+-- 				-- exec(255,1),
+-- 				--(t1[i].x * t1[i].y
+-- 				-- + (cos:get() + sin:get())
+-- 					--)),
+-- 				-- exec(255, (t1[i].x * t1[i].y + time * scale) / scale)
+-- 			)
+-- 		else
+-- 			love.graphics.setColor(
+-- 				--exec((t1[i].x * t1[i].y + time * 64) / 64, 1),
+-- 				exec(255, 1),
+-- 				exec(255, cos1:get() * cos2:get()),
+-- 				exec(255, 0),
+-- 				exec(255, (t1[i].x * t1[i].y + time * var1) / var1)
+-- 				-- exec(t1[i].n, cos:get()),
+-- 				-- exec(t1[i].n, cos1t:get()),
+-- 				-- exec(t1[i].n, cos2t:get()),
+-- 				-- exec(255, (t1[i].x * t1[i].y + time * var1) / var1)
+-- 				-- exec(255,1),
+-- 					--(t1[i].x * t1[i].y
+-- 				-- + sin:get()
+-- 					--)),
+-- 				-- exec(255,1),
+-- 				--(t1[i].x * t1[i].y
+-- 				-- + (cos:get() + sin:get())
+-- 					--)),
+-- 				-- exec(255, (t1[i].x * t1[i].y + time * scale) / scale)
+-- 			)
+-- 		end
+-- 		if shape == 'rect' then
+-- 			love.graphics.rectangle(mode, t1[i].x + 1, t1[i].y + 1, Wsize - 2, Hsize - 2)
+-- 		elseif shape == 'circle' then
+-- 			love.graphics.circle(mode, t1[i].x + (Wsize / 2), t1[i].y + (Hsize / 2), (Wsize / 2) - 2)
+-- 		end
+-- 			-- t1[i].n = time
+-- 			EasyColor.setBlank()
+-- 		if i % scale == 0 then
+-- 			j = j + 1
+-- 		end
+-- 	end
+
+-- 	love.graphics.setCanvas()
+
+-- 	FPS:update(dt)
+-- end
+
+function love.load()
+	t = {}
+
+	Wsize = love.window.getWidth() / scale
+	Hsize = love.window.getHeight() / scale
+
+	img = love.graphics.newImage("O.png")
+	data = img:getData()
+
+	i = 0
+	j = 0
+	data:mapPixel( function (x, y, r, g, b, a)
+		print("x", x, "y", y)
+		print("i", i, "j", j)
+		table.insert(t, {x = i * Wsize, y = j * Hsize, r = r, g = g, b = b, a = a})
+		j = j + 1
+		if j >= scale then
+			j = 0
+			i = i + 1
 		end
-	end
-	love.graphics.setCanvas()
+		return r, g, b, a
+	end)
 
-	FPS:update(dt)
+	canvas = love.graphics.newCanvas(love.window.getWidth(), love.window.getHeight())
+end
+
+function love.update(dt)
+	love.graphics.setCanvas(canvas)
+		for i,v in ipairs(t) do
+			love.graphics.setColor(v.r, v.g, v.b, v.a)
+			love.graphics.rectangle('line', v.x, v.y, Wsize, Hsize)
+			EasyColor.setBlank()
+		end
+	love.graphics.setCanvas()
 end
 
 function love.draw()
-	love.graphics.print(time, love.window.getWidth() - 52, 10)
-	love.graphics.print(scale, love.window.getWidth() - 52, 25)
 	love.graphics.draw(canvas)
-	-- FPS:draw()
 	-- OverTime:draw()
-	-- love.setBlank()
+	-- EasyColor.setBlank()
+	-- FPS:draw()
 end
 
 function love.keypressed(key, unicode)
@@ -242,6 +195,12 @@ function love.keypressed(key, unicode)
 		var1 = var1 + 1
 	elseif key == 'down' then
 		var1 = var1 - 1
+	elseif key == '1' then
+		if mode == 'line' then mode = 'fill'
+		else mode = 'line' end
+	elseif key == '2' then
+		if shape == 'circle' then shape = 'rect'
+		else shape = 'circle' end
 	end
 end
 
